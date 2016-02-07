@@ -5,14 +5,20 @@ import java.util.Random;
 public class Neuron {
 	
 Neuron(int numOutputs, int myIndex) {
-	for(int i = 0; i < numOutputs; ++i ){
+	for(int i = 0; i < numOutputs ; ++i ){
 		Connection Connection = new Connection();
 		m_outputWeights.add(Connection);
 		// Initialize with Random Weight of the last Neuron Appended thats why I have size()-1
 		m_outputWeights.get(m_outputWeights.size()-1).weight = randomWeight();
+		// Test to see weight values of neurons are properly set
+		System.out.println(m_outputWeights.get(0).weight);
 	}
 		m_myIndex = myIndex;
+		
+		System.out.println(m_myIndex);
 }
+
+
 
 // Public Methods
 public double getoutputVal() {
@@ -42,7 +48,6 @@ public void calcOutputGradients(double targetVal) {
 public void calcHiddenGradients(final ArrayList<Neuron> nextLayer) {
 
 	double dow = sumDow(nextLayer);
-	
 	m_gradient = dow * transferFunctionDerivative(m_outputVal);
 }
 
@@ -52,10 +57,7 @@ public void updateInputWeights(final ArrayList<Neuron> prevLayer){
 	
 	for(int n = 0; n < prevLayer.size(); ++n){
 		Neuron neuron = prevLayer.get(n);
-		
 		double oldDeltaWeight = neuron.m_outputWeights.get(m_myIndex).deltaWeight;
-		
-		
 /*		n (eta) - Overall net learning Rate
 		0.0 - slow learner
 		0.2 - medium learner
@@ -64,15 +66,11 @@ public void updateInputWeights(final ArrayList<Neuron> prevLayer){
 		a (alpha) - momentum
 		0.0 - no momentum
 		0.5 - moderate momentum*/
-		
 		// Individual input, magnified by the gradient and training rate
 		double newDeltaWeight = eta * neuron.getoutputVal() * m_gradient * alpha * oldDeltaWeight;
-		
 		neuron.m_outputWeights.get(m_myIndex).deltaWeight = newDeltaWeight;
 		neuron.m_outputWeights.get(m_myIndex).weight += newDeltaWeight;
-		
 	}
-	
 }
 
 public double sumDow(final ArrayList<Neuron> nextLayer){
@@ -110,10 +108,7 @@ private double transferFunctionDerivative(double x){
 }
 
 private double m_gradient;
-
 private static double eta = 0.15; // [0.0 .. 1.0] learning rate
 private static double alpha = 0.5; // [0.0 .. n] Multiplier of last weight change is the MOMENTUM
-
-
 }
 

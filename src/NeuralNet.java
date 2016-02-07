@@ -4,7 +4,7 @@ public class NeuralNet {
 	public ArrayList<Neuron> Layer = new ArrayList<Neuron>();
 	public ArrayList<Neuron> prevLayer = new ArrayList<Neuron>();
 
-	public NeuralNet(final ArrayList<Integer> topology) {
+	NeuralNet(final ArrayList<Integer> topology) {
 		int numLayers = topology.size();
 		for (int layerNum = 0; layerNum < numLayers; ++layerNum) {
 			m_layer.add(Layer);
@@ -24,9 +24,7 @@ public class NeuralNet {
 	}
 
 	public void feedForward(final ArrayList<Double> inputVals) {
-
 		assert (inputVals.size() == m_layer.get(0).size() - 1);
-
 		// This will Assign the input values into the input neurons
 		for (int i = 0; i < inputVals.size(); i++) {
 			m_layer.get(0).get(i).setoutputVal(inputVals.get(i));
@@ -44,10 +42,7 @@ public class NeuralNet {
 	}
 
 	public void backProp(final ArrayList<Double> targetVals) {
-		// TODO Auto-generated method stub
-
-		
-		// check this... // For all layers from outputs to first hidden layer
+		//check this... // For all layers from outputs to first hidden layer
 		ArrayList<Neuron> outputLayer = new ArrayList<Neuron>();
 		outputLayer = this.m_layer.get(m_layer.size() - 1);
 		m_error = 0.0;
@@ -100,7 +95,6 @@ public class NeuralNet {
 	}
 
 	public void getResults(ArrayList<Double> resultVals) {
-		// TODO Auto-generated method stub
 		resultVals.clear();
 		for(int n = 0; n < m_layer.get(m_layer.size() - 1).size()-1; ++n ){
 			resultVals.add(m_layer.get(m_layer.size() - 1).get(n).getoutputVal());
