@@ -6,9 +6,9 @@ public class main {
 	{
 		
 		ArrayList<Integer> topology = new ArrayList<Integer>();
-		topology.add(3);
-		topology.add(2);
-		topology.add(1);
+		topology.add(3); // Input Layer 2 + bias
+		topology.add(2); // Hidden Layer 2 + bias
+		topology.add(1); // Output layer 1 + bias
 		
 		NeuralNet Net = new NeuralNet(topology);
 		
