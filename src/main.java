@@ -16,20 +16,22 @@ public class main {
 //		
 //		layerTest = newNet.getm_layer();
 //		
-//		for(int i = 0; i< layerTest.size(); i++){
-//			for(int n =0; n < layerTest.get(i).size(); n++){
-//				System.out.println(layerTest.get(i).get(n).getoutputVal());
-//			}
-//			System.out.println("Layer");
-//		}
-//	
+/*		for(int i = 0; i< layerTest.size(); i++){
+			for(int n =0; n < layerTest.get(i).size(); n++){
+				System.out.println(layerTest.get(i).get(n).getoutputVal());
+			}
+			System.out.println("Layer");
+		}*/
+		
 
 		
 		
 		Training XOR = new Training(2, 4, 1, "trainingData.txt");
 		
 		try {
+			
 			XOR.RunANN();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
