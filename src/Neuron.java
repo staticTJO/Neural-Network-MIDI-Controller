@@ -11,11 +11,8 @@ Neuron(int numOutputs, int myIndex) {
 		// Initialize with Random Weight of the last Neuron Appended thats why I have size()-1
 		m_outputWeights.get(m_outputWeights.size()-1).weight = randomWeight();
 		// Test to see weight values of neurons are properly set
-		System.out.println(m_outputWeights.get(0).weight);
 	}
 		m_myIndex = myIndex;
-		
-		System.out.println(m_myIndex);
 }
 
 
@@ -56,6 +53,7 @@ public void updateInputWeights(final ArrayList<Neuron> prevLayer){
 	// of the neuron in the preceding layer
 	
 	for(int n = 0; n < prevLayer.size(); ++n){
+		// I think this is correct.
 		Neuron neuron = prevLayer.get(n);
 		double oldDeltaWeight = neuron.m_outputWeights.get(m_myIndex).deltaWeight;
 /*		n (eta) - Overall net learning Rate

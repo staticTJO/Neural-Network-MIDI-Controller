@@ -1,18 +1,18 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class main {
 
 	public static void main(String[] args) {
 
-		ArrayList<Integer> topology = new ArrayList<Integer>();
-		topology.add(3); // Input Layer 2 + bias
-		topology.add(2); // Hidden Layer 1 + bias
-		topology.add(1); // Output layer 1 + bias
+		Training XOR = new Training(2, 4, 1, "trainingData.txt");
 		
-
-
-		NeuralNet Net = new NeuralNet(topology);
-
+		try {
+			XOR.RunANN();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		/*ArrayList<Double> inputVals = new ArrayList<Double>();
 		Net.feedForward(inputVals);
 

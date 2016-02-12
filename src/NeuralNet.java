@@ -2,21 +2,20 @@ import java.util.ArrayList;
 
 public class NeuralNet {
 	public ArrayList<Neuron> Layer = new ArrayList<Neuron>();
-	public ArrayList<Neuron> prevLayer = new ArrayList<Neuron>();
+	public ArrayList<Neuron> prevLayer;
 
 	NeuralNet(final ArrayList<Integer> topology) {
 		int numLayers = topology.size();
 		for (int layerNum = 0; layerNum < numLayers; ++layerNum) {
 			m_layer.add(Layer);
 
-			for (int neuronNum = 0; neuronNum <= topology.size() - 1; ++neuronNum) {
+			for (int neuronNum = 0; neuronNum <= topology.get(layerNum); ++neuronNum) {
 				int numOutputs = layerNum == topology.size() - 1 ? 0 : topology
 						.get(layerNum + 1);
 
 				Neuron Neuron = new Neuron(numOutputs,neuronNum);
 
 				m_layer.get(m_layer.size() - 1).add(Neuron);
-				System.out.println("Added a Neuron!");
 			}
 			//Set Bias to constant value of 1.0
 			m_layer.get(m_layer.size() - 1).get(m_layer.size() - 1).setoutputVal(1.0);
@@ -33,7 +32,7 @@ public class NeuralNet {
 		// Forward Propagate
 		for (int layerNum = 1; layerNum < m_layer.size(); ++layerNum) {
 			// Gets instance of object
-			prevLayer = this.m_layer.get(layerNum - 1);
+			prevLayer = m_layer.get(layerNum - 1);
 			for (int n = 0; n < m_layer.get(layerNum).size() - 1; ++n) {
 				m_layer.get(layerNum).get(n).feedForward(prevLayer);
 			}
@@ -105,5 +104,10 @@ public class NeuralNet {
 	private double m_error;
 	private double m_recentAverageError;
 	private double m_recentAverageSmoothingFactor;
+
+	public double getRecentAverageError() {
+		// TODO Auto-generated method stub
+		return m_recentAverageError;
+	}
 
 }
