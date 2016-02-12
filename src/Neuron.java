@@ -7,6 +7,7 @@ public class Neuron {
 Neuron(int numOutputs, int myIndex) {
 	for(int i = 0; i < numOutputs ; ++i ){
 		Connection Connection = new Connection();
+		m_outputWeights = new ArrayList<Connection>();
 		m_outputWeights.add(Connection);
 		// Initialize with Random Weight of the last Neuron Appended thats why I have size()-1
 		m_outputWeights.get(m_outputWeights.size()-1).weight = randomWeight();
@@ -48,7 +49,7 @@ public void calcHiddenGradients(final ArrayList<Neuron> nextLayer) {
 	m_gradient = dow * transferFunctionDerivative(m_outputVal);
 }
 
-public void updateInputWeights(final ArrayList<Neuron> prevLayer){
+public void updateInputWeights(final ArrayList<Neuron> prevLayer){ //Good
 	// The weights are updated in the Connection container
 	// of the neuron in the preceding layer
 	
@@ -71,7 +72,7 @@ public void updateInputWeights(final ArrayList<Neuron> prevLayer){
 	}
 }
 
-public double sumDow(final ArrayList<Neuron> nextLayer){
+public double sumDow(final ArrayList<Neuron> nextLayer){ //Good
 	double sum = 0.0;
 	
 	// Sum up the contributed errors at the nodes fed
@@ -86,7 +87,7 @@ public double sumDow(final ArrayList<Neuron> nextLayer){
 
 private double m_outputVal;
 private int m_myIndex;
-private ArrayList<Connection> m_outputWeights = new ArrayList<Connection>();
+private ArrayList<Connection> m_outputWeights;
 
 // Private Methods
 private double randomWeight() {
@@ -106,7 +107,7 @@ private double transferFunctionDerivative(double x){
 }
 
 private double m_gradient;
-private static double eta = 0.15; // [0.0 .. 1.0] learning rate
-private static double alpha = 0.5; // [0.0 .. n] Multiplier of last weight change is the MOMENTUM
+public static double eta = 0.15; // [0.0 .. 1.0] learning rate
+public static double alpha = 0.5; // [0.0 .. n] Multiplier of last weight change is the MOMENTUM
 }
 

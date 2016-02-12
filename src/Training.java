@@ -64,7 +64,7 @@ public void RunANN() throws IOException{
 		targetVals.add(Double.parseDouble(TargetVals));
 		
 		for(int v =0; v < targetVals.size(); v++){
-			System.out.println("Targets:"+ targetVals.get(v));
+			System.out.println("Target:"+ targetVals.get(v));
 		}
 		ANN.backProp(targetVals);
 		System.out.println("Net recent average Error: " + ANN.getRecentAverageError());
