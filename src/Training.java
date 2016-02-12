@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Training {
 	
 Training(int Numinputneurons, int Numhiddenneurons, int Numoutputneurons,String TrainingFileName){
-	this.NumInputNeruons = Numhiddenneurons;
+	this.NumInputNeruons = Numinputneurons;
 	this.NumHiddenNeurons = Numhiddenneurons;
 	this.NumOutputNeurons = Numoutputneurons;
 	this.TrainingFileName = TrainingFileName;
@@ -20,7 +20,7 @@ Training(int Numinputneurons, int Numhiddenneurons, int Numoutputneurons,String 
 	this.topology.add(NumInputNeruons);
 	this.topology.add(NumHiddenNeurons);
 	this.topology.add(NumOutputNeurons);
-	
+
 	// Initialize ANN
 	this.ANN = new NeuralNet(topology);
 }

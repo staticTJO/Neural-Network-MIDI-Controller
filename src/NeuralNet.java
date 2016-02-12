@@ -2,28 +2,30 @@ import java.util.ArrayList;
 
 public class NeuralNet {
 	public ArrayList<Neuron> Layer = new ArrayList<Neuron>();
-	public ArrayList<Neuron> prevLayer;
+	public ArrayList<Neuron> prevLayer = new ArrayList<Neuron>();
 
 	NeuralNet(final ArrayList<Integer> topology) {
 		int numLayers = topology.size();
 		for (int layerNum = 0; layerNum < numLayers; ++layerNum) {
+			Layer = new ArrayList<Neuron>();
 			m_layer.add(Layer);
-
-			for (int neuronNum = 0; neuronNum <= topology.get(layerNum); ++neuronNum) {
-				int numOutputs = layerNum == topology.size() - 1 ? 0 : topology
-						.get(layerNum + 1);
+			int numOutputs = layerNum == topology.size() - 1 ? 0 : topology
+					.get(layerNum + 1);
+			for (int neuronNum = 0; neuronNum < topology.get(layerNum)+1; ++neuronNum) {
 
 				Neuron Neuron = new Neuron(numOutputs,neuronNum);
 
 				m_layer.get(m_layer.size() - 1).add(Neuron);
+				//m_layer.get(layerNum).add(Neuron);
 			}
 			//Set Bias to constant value of 1.0
-			m_layer.get(m_layer.size() - 1).get(m_layer.size() - 1).setoutputVal(1.0);
+			m_layer.get(layerNum).get(m_layer.get(layerNum).size()-1).setoutputVal(1.0);
 		}
+		
 	}
 
 	public void feedForward(final ArrayList<Double> inputVals) {
-		assert (inputVals.size() == m_layer.get(0).size() - 1);
+	//	assert (inputVals.size() == m_layer.get(0).size() - 1);
 		// This will Assign the input values into the input neurons
 		for (int i = 0; i < inputVals.size(); i++) {
 			m_layer.get(0).get(i).setoutputVal(inputVals.get(i));
@@ -32,7 +34,7 @@ public class NeuralNet {
 		// Forward Propagate
 		for (int layerNum = 1; layerNum < m_layer.size(); ++layerNum) {
 			// Gets instance of object
-			prevLayer = m_layer.get(layerNum - 1);
+			prevLayer = this.m_layer.get(layerNum - 1);
 			for (int n = 0; n < m_layer.get(layerNum).size() - 1; ++n) {
 				m_layer.get(layerNum).get(n).feedForward(prevLayer);
 			}
@@ -108,6 +110,10 @@ public class NeuralNet {
 	public double getRecentAverageError() {
 		// TODO Auto-generated method stub
 		return m_recentAverageError;
+	}
+	
+	public ArrayList<ArrayList<Neuron>> getm_layer(){
+		return this.m_layer;
 	}
 
 }
