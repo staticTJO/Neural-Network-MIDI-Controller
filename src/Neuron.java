@@ -4,10 +4,9 @@ import java.util.Random;
 
 public class Neuron {
 	
-Neuron(int numOutputs, int myIndex) {
-	for(int i = 0; i < numOutputs ; ++i ){
+Neuron(int numOutputs, int myIndex) { // Good
+	for(int i = 0; i < numOutputs ; ++i ){;
 		Connection Connection = new Connection();
-		m_outputWeights = new ArrayList<Connection>();
 		m_outputWeights.add(Connection);
 		// Initialize with Random Weight of the last Neuron Appended thats why I have size()-1
 		m_outputWeights.get(m_outputWeights.size()-1).weight = randomWeight();
@@ -20,14 +19,14 @@ Neuron(int numOutputs, int myIndex) {
 
 // Public Methods
 public double getoutputVal() {
-	return m_outputVal;
+	return this.m_outputVal;
 }
 
 public void setoutputVal(double m_outputVal) {
 	this.m_outputVal = m_outputVal;
 }
 
-public void feedForward(final ArrayList<Neuron> prevLayer) {
+public void feedForward(final ArrayList<Neuron> prevLayer) { // Error Propagates to this function
 	double sum = 0.0;
 	for (int n = 0; n < prevLayer.size(); ++n){
 		// output = Function(sum of Iconnections * IWeights)
@@ -37,19 +36,19 @@ public void feedForward(final ArrayList<Neuron> prevLayer) {
 	m_outputVal = transferFunction(sum);
 }
 
-public void calcOutputGradients(double targetVal) {
+public void calcOutputGradients(double targetVal) { // Good
 
 	double delta = targetVal - m_outputVal;
 	m_gradient = delta * transferFunctionDerivative(m_outputVal);
 }
 
-public void calcHiddenGradients(final ArrayList<Neuron> nextLayer) {
+public void calcHiddenGradients(final ArrayList<Neuron> nextLayer) { // Good
 
 	double dow = sumDow(nextLayer);
 	m_gradient = dow * transferFunctionDerivative(m_outputVal);
 }
 
-public void updateInputWeights(final ArrayList<Neuron> prevLayer){ //Good
+public void updateInputWeights(final ArrayList<Neuron> prevLayer){ // Good
 	// The weights are updated in the Connection container
 	// of the neuron in the preceding layer
 	
@@ -87,21 +86,20 @@ public double sumDow(final ArrayList<Neuron> nextLayer){ //Good
 
 private double m_outputVal;
 private int m_myIndex;
-private ArrayList<Connection> m_outputWeights;
+private ArrayList<Connection> m_outputWeights = new ArrayList<Connection>();;
 
 // Private Methods
-private double randomWeight() {
+private double randomWeight() { // Good
 	double randomdbl = new Random().nextDouble();
 	return (randomdbl);
 }
 
-private double transferFunction(double x) {
+private double transferFunction(double x) { // Good
 // using tanH - output range[-1.0 - 1.0]
-	
 	return Math.tanh(x);
 }
 
-private double transferFunctionDerivative(double x){
+private double transferFunctionDerivative(double x){ // Good
 	//tanh Derivative
 	return 1.0 - x*x;
 }

@@ -42,7 +42,7 @@ public void RunANN() throws IOException{
 		System.out.print("Pass " + trainingPass +" ");
 		inputVals.clear();
 		//Generate Inputs
-		int num1 = (int)(2.0 * doubleRand.nextDouble());
+		int num1 =  (int)(2.0 * doubleRand.nextDouble());
 		int num2 = (int)(2.0 * doubleRand.nextDouble());
 		int xor = num1 ^ num2;
 		TargetVals = xor + ".0";
@@ -52,11 +52,11 @@ public void RunANN() throws IOException{
 		inputVals.add(Double.parseDouble(InputVal1));
 		inputVals.add(Double.parseDouble(InputVal2));
 		
-		System.out.print("Inputs:"+ InputVal1 + InputVal2 +" ");
+		System.out.print("Inputs:"+ InputVal1 +" " + InputVal2 +" ");
 		ANN.feedForward(inputVals);
 		
 		ANN.getResults(resultVals);
-		for(int n =0; n<resultVals.size(); n++){
+		for(int n =0; n < resultVals.size(); n++){
 		System.out.println("");
 		System.out.println("Outputs:"+resultVals.get(n));
 	}
